@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:house_an_apartement/firebase/form_Page.dart';
-import 'package:house_an_apartement/firebase/profile.dart';
-import 'package:house_an_apartement/firebase/widget.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile_Image extends StatefulWidget {
@@ -30,8 +28,10 @@ class _Profile_ImageState extends State<Profile_Image> {
   late String _imageUrl = '';
 
   Future<void> _loadImageUrl() async {
-    final userDoc =
-        await FirebaseFirestore.instance.collection('images').doc(_userId).get();
+    final userDoc = await FirebaseFirestore.instance
+        .collection('images')
+        .doc(_userId)
+        .get();
     final data = userDoc.data();
     if (mounted && data != null && data.containsKey('avatarUrl')) {
       setState(() {
@@ -58,7 +58,7 @@ class _Profile_ImageState extends State<Profile_Image> {
 
   void _changeProfilePicture() async {
     final pickedFile =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         _imageFile = File(pickedFile.path);

@@ -16,15 +16,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   FirebaseAuth currentUser = FirebaseAuth.instance;
   Future<void> _refresh() async {
-    setState(() {
-    });
+    setState(() {});
     return Future.delayed(Duration(seconds: 1));
 
     // Implement the logic to refresh the page here
     // For example, you can fetch new data from the server
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +36,8 @@ class _HomePageState extends State<HomePage> {
         }
       },
       child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Colors.white,
+        // backgroundColor: Theme.of(context).backgroundColor,
         drawer: Drawer_Header(),
         appBar: AppBar(
           backgroundColor: Colors.purple,
@@ -58,20 +56,16 @@ class _HomePageState extends State<HomePage> {
             onRefresh: _refresh,
             child: SingleChildScrollView(
               child: Container(
-                
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     WelcomeText(),
                     AllPost(),
-                    
                   ],
                 ),
               ),
             ),
-            
           );
-          
         }),
         floatingActionButton: Floating_Button(),
       ),
